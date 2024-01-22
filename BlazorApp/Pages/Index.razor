@@ -1,0 +1,52 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Calcular parcelas com juros aplicados!</h1>
+
+<laber>Valor da conta:</laber>
+<br>
+<input @bind="price"></input>
+<br>
+
+<laber>QTDA Parcelas:</laber>
+<br>
+<input @bind="installments"></input>
+<br>
+
+<laber>Juros:</laber>
+<br>
+<input @bind="fees"></input>
+<br>
+<br>
+
+<button @onclick="CalcFees">Simular</button>
+<br>
+<br>
+
+<label>O total a ser pago com os juros: R$<span>@total</span></label>
+<br>
+<br>
+<label>A mensalidade a ser paga com os juros: R$<span>@totalInstallments</span></label>
+<br>
+<br>
+<label>Juros aplicados no total: R$<span>@feesAfter</span></label>
+
+
+@code{
+    public double price;
+    public int installments;
+    public double total;
+    public double totalInstallments;
+    public double fees;
+    public double feesAfter;
+
+    private void CalcFees()
+    {
+        feesAfter = (price / 100) * fees;
+        total = price + feesAfter;
+        totalInstallments = Math.Round(total / installments);
+    }
+}
+
+<SurveyPrompt Title="How is Blazor working for you?" />
